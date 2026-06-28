@@ -1,0 +1,13 @@
+[run]
+source = src
+omit =
+    src/main.py
+    */__init__.py
+
+[report]
+precision = 2
+show_missing = True
+skip_empty = True
+
+[html]
+directory = docs/coverage/html

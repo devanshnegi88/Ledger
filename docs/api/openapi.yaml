@@ -1,0 +1,1663 @@
+openapi: 3.1.0
+info:
+  title: Ledger System API
+  description: Double-Entry Accounting & Immutable Audit Trail
+  version: 0.1.0
+paths:
+  /api/v1/deposit:
+    post:
+      tags:
+      - transactions
+      summary: Deposit
+      operationId: deposit_api_v1_deposit_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositBankRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/withdraw:
+    post:
+      tags:
+      - transactions
+      summary: Withdraw
+      operationId: withdraw_api_v1_withdraw_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WithdrawalRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/transfer:
+    post:
+      tags:
+      - transactions
+      summary: Transfer
+      operationId: transfer_api_v1_transfer_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/P2PTransferRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/fee-deduction:
+    post:
+      tags:
+      - transactions
+      summary: Fee Deduction
+      operationId: fee_deduction_api_v1_fee_deduction_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeeDeductionRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchant-payment/qr:
+    post:
+      tags:
+      - transactions
+      summary: Merchant Payment Qr
+      operationId: merchant_payment_qr_api_v1_merchant_payment_qr_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantQRPaymentRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/merchant-payment/online:
+    post:
+      tags:
+      - transactions
+      summary: Merchant Payment Online
+      operationId: merchant_payment_online_api_v1_merchant_payment_online_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantOnlinePaymentRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/bill-payment:
+    post:
+      tags:
+      - transactions
+      summary: Bill Payment
+      operationId: bill_payment_api_v1_bill_payment_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPaymentRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/interest-accrual:
+    post:
+      tags:
+      - transactions
+      summary: Interest Accrual
+      operationId: interest_accrual_api_v1_interest_accrual_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InterestAccrualRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/fx:
+    post:
+      tags:
+      - transactions
+      summary: Fx Conversion
+      operationId: fx_conversion_api_v1_fx_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FXConversionRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/reversal:
+    post:
+      tags:
+      - transactions
+      summary: Reversal
+      operationId: reversal_api_v1_reversal_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FullReversalRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/refund:
+    post:
+      tags:
+      - transactions
+      summary: Refund
+      operationId: refund_api_v1_refund_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartialRefundRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/interest-payout:
+    post:
+      tags:
+      - transactions
+      summary: Interest Payout
+      operationId: interest_payout_api_v1_interest_payout_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InterestPayoutRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/cashback-credit:
+    post:
+      tags:
+      - transactions
+      summary: Cashback Credit
+      operationId: cashback_credit_api_v1_cashback_credit_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CashbackCreditRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/promotional-credit:
+    post:
+      tags:
+      - transactions
+      summary: Promotional Credit
+      operationId: promotional_credit_api_v1_promotional_credit_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionalCreditRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/loan-disbursement:
+    post:
+      tags:
+      - transactions
+      summary: Loan Disbursement
+      operationId: loan_disbursement_api_v1_loan_disbursement_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanDisbursementRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/loan-emi:
+    post:
+      tags:
+      - transactions
+      summary: Loan Emi
+      operationId: loan_emi_api_v1_loan_emi_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanEMIRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chargeback:
+    post:
+      tags:
+      - transactions
+      summary: Chargeback
+      operationId: chargeback_api_v1_chargeback_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargebackRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/reward-redemption:
+    post:
+      tags:
+      - transactions
+      summary: Reward Redemption
+      operationId: reward_redemption_api_v1_reward_redemption_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewardRedemptionRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/account-closure:
+    post:
+      tags:
+      - transactions
+      summary: Account Closure
+      operationId: account_closure_api_v1_account_closure_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountClosureSweepRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/deposit-card:
+    post:
+      tags:
+      - transactions
+      summary: Deposit Card
+      operationId: deposit_card_api_v1_deposit_card_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositCardRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/trial-balance:
+    get:
+      tags:
+      - reports
+      summary: Trial Balance
+      operationId: trial_balance_api_v1_trial_balance_get
+      parameters:
+      - name: as_of_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/accounts/{account_code}/statement:
+    get:
+      tags:
+      - reports
+      summary: Account Statement
+      operationId: account_statement_api_v1_accounts__account_code__statement_get
+      parameters:
+      - name: account_code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Code
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: From Date
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: To Date
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          default: 100
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(json|csv)$
+          default: json
+          title: Format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/reports/income-statement:
+    get:
+      tags:
+      - reports
+      summary: Income Statement
+      operationId: income_statement_api_v1_reports_income_statement_get
+      parameters:
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: From Date
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: To Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/reports/balance-sheet:
+    get:
+      tags:
+      - reports
+      summary: Balance Sheet
+      operationId: balance_sheet_api_v1_reports_balance_sheet_get
+      parameters:
+      - name: as_of_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/reports/currency-exposure:
+    get:
+      tags:
+      - reports
+      summary: Currency Exposure
+      operationId: currency_exposure_api_v1_reports_currency_exposure_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/audit/verify:
+    get:
+      tags:
+      - audit
+      summary: Audit Verify
+      operationId: audit_verify_api_v1_audit_verify_get
+      parameters:
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: From Date
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: To Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/audit/hash-chain:
+    get:
+      tags:
+      - audit
+      summary: Audit Hash Chain
+      operationId: audit_hash_chain_api_v1_audit_hash_chain_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/health:
+    get:
+      summary: Health Check
+      description: "Part A10.3 \u2014 health check endpoint."
+      operationId: health_check_api_v1_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    AccountClosureSweepRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Account closure sweep
+      type: object
+      required:
+      - customer_account_code
+      - idempotency_key
+      - created_by
+      title: AccountClosureSweepRequest
+    BillPaymentRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        biller_code:
+          type: string
+          title: Biller Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        convenience_fee:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Convenience Fee
+          default: '0'
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Bill payment
+      type: object
+      required:
+      - customer_account_code
+      - biller_code
+      - amount
+      - idempotency_key
+      - created_by
+      title: BillPaymentRequest
+    CashbackCreditRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        campaign_code:
+          type: string
+          title: Campaign Code
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Cashback credit
+      type: object
+      required:
+      - customer_account_code
+      - amount
+      - campaign_code
+      - idempotency_key
+      - created_by
+      title: CashbackCreditRequest
+    ChargebackRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        merchant_code:
+          type: string
+          title: Merchant Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        chargeback_fee:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Chargeback Fee
+          default: '0'
+        network_dispute_code:
+          type: string
+          title: Network Dispute Code
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Chargeback
+      type: object
+      required:
+      - customer_account_code
+      - merchant_code
+      - amount
+      - network_dispute_code
+      - idempotency_key
+      - created_by
+      title: ChargebackRequest
+    DepositBankRequest:
+      properties:
+        account_code:
+          type: string
+          title: Account Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Customer deposit via bank transfer
+      type: object
+      required:
+      - account_code
+      - amount
+      - idempotency_key
+      - created_by
+      title: DepositBankRequest
+    DepositCardRequest:
+      properties:
+        account_code:
+          type: string
+          title: Account Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        gateway_fee:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Gateway Fee
+          default: '0'
+        card_auth_token:
+          type: string
+          title: Card Auth Token
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Customer deposit via card
+      type: object
+      required:
+      - account_code
+      - amount
+      - card_auth_token
+      - idempotency_key
+      - created_by
+      title: DepositCardRequest
+    FXConversionRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        source_currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Source Currency
+        target_currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Target Currency
+        source_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Source Amount
+        fx_markup_bps:
+          type: integer
+          minimum: 0.0
+          title: Fx Markup Bps
+          description: FX markup in basis points (50 = 0.5%)
+          default: 50
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: FX conversion
+      type: object
+      required:
+      - customer_account_code
+      - source_currency
+      - target_currency
+      - source_amount
+      - idempotency_key
+      - created_by
+      title: FXConversionRequest
+    FeeDeductionRequest:
+      properties:
+        account_code:
+          type: string
+          title: Account Code
+        fee_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Fee Amount
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Monthly maintenance fee
+      type: object
+      required:
+      - account_code
+      - fee_amount
+      - idempotency_key
+      - created_by
+      title: FeeDeductionRequest
+    FullReversalRequest:
+      properties:
+        original_transaction_id:
+          type: string
+          title: Original Transaction Id
+        reason:
+          type: string
+          title: Reason
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+      type: object
+      required:
+      - original_transaction_id
+      - reason
+      - idempotency_key
+      - created_by
+      title: FullReversalRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InterestAccrualRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        interest_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Interest Amount
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+          default: system-scheduler
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Daily interest accrual
+      type: object
+      required:
+      - customer_account_code
+      - interest_amount
+      - idempotency_key
+      title: InterestAccrualRequest
+    InterestPayoutRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        gross_interest_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Gross Interest Amount
+        tds_rate_bps:
+          type: integer
+          maximum: 10000.0
+          minimum: 0.0
+          title: Tds Rate Bps
+          description: TDS in basis points (1000 = 10%)
+          default: 1000
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+          default: system-scheduler
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Monthly interest payout
+      type: object
+      required:
+      - customer_account_code
+      - gross_interest_amount
+      - idempotency_key
+      title: InterestPayoutRequest
+    LoanDisbursementRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        principal_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Principal Amount
+        processing_fee:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Processing Fee
+          default: '0'
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Loan disbursement
+      type: object
+      required:
+      - customer_account_code
+      - principal_amount
+      - idempotency_key
+      - created_by
+      title: LoanDisbursementRequest
+    LoanEMIRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        principal_component:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Principal Component
+        interest_component:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Interest Component
+        penalty_component:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Penalty Component
+          default: '0'
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Loan EMI payment
+      type: object
+      required:
+      - customer_account_code
+      - principal_component
+      - interest_component
+      - idempotency_key
+      - created_by
+      title: LoanEMIRequest
+    MerchantOnlinePaymentRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        merchant_code:
+          type: string
+          title: Merchant Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        fee_amount:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Fee Amount
+          default: '0'
+        tax_amount:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Tax Amount
+          default: '0'
+        gateway_session_id:
+          type: string
+          title: Gateway Session Id
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Merchant online payment
+      type: object
+      required:
+      - customer_account_code
+      - merchant_code
+      - amount
+      - gateway_session_id
+      - idempotency_key
+      - created_by
+      title: MerchantOnlinePaymentRequest
+    MerchantQRPaymentRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        merchant_code:
+          type: string
+          title: Merchant Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        fee_amount:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Fee Amount
+          default: '0'
+        tax_amount:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Tax Amount
+          default: '0'
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Merchant QR payment
+      type: object
+      required:
+      - customer_account_code
+      - merchant_code
+      - amount
+      - idempotency_key
+      - created_by
+      title: MerchantQRPaymentRequest
+    P2PTransferRequest:
+      properties:
+        sender_account_code:
+          type: string
+          title: Sender Account Code
+        recipient_account_code:
+          type: string
+          title: Recipient Account Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        fee_amount:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Fee Amount
+          default: '0'
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: P2P transfer
+      type: object
+      required:
+      - sender_account_code
+      - recipient_account_code
+      - amount
+      - idempotency_key
+      - created_by
+      title: P2PTransferRequest
+    PartialRefundRequest:
+      properties:
+        original_transaction_id:
+          type: string
+          title: Original Transaction Id
+        refund_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Refund Amount
+        fee_refund_policy:
+          type: string
+          enum:
+          - PROPORTIONAL
+          - FULL
+          - NONE
+          title: Fee Refund Policy
+          default: PROPORTIONAL
+        reason:
+          type: string
+          title: Reason
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+      type: object
+      required:
+      - original_transaction_id
+      - refund_amount
+      - reason
+      - idempotency_key
+      - created_by
+      title: PartialRefundRequest
+    PromotionalCreditRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        promo_code:
+          type: string
+          title: Promo Code
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Promotional credit
+      type: object
+      required:
+      - customer_account_code
+      - amount
+      - promo_code
+      - idempotency_key
+      - created_by
+      title: PromotionalCreditRequest
+    RewardRedemptionRequest:
+      properties:
+        customer_account_code:
+          type: string
+          title: Customer Account Code
+        redemption_amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Redemption Amount
+        points_redeemed:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Points Redeemed
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Reward points redemption
+      type: object
+      required:
+      - customer_account_code
+      - redemption_amount
+      - points_redeemed
+      - idempotency_key
+      - created_by
+      title: RewardRedemptionRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WithdrawalRequest:
+      properties:
+        account_code:
+          type: string
+          title: Account Code
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Amount
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          title: Currency
+          default: INR
+        idempotency_key:
+          type: string
+          maxLength: 128
+          minLength: 8
+          title: Idempotency Key
+        created_by:
+          type: string
+          title: Created By
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+          default: Customer withdrawal via bank transfer
+      type: object
+      required:
+      - account_code
+      - amount
+      - idempotency_key
+      - created_by
+      title: WithdrawalRequest
